@@ -129,7 +129,10 @@ ggsave("figures/branching_points_combined.png", p, width = 8, height = 7)
 
 # One patch model
 
-data <- read.csv("/home/raphael/adaptive_dynamics.csv")
+rm(list = ls())
+library(tidyverse)
+
+data <- read.csv("data/adaptive_dynamics_patch1.csv")
 
 data$isconv <- data$isconv == "True"
 data[, c("x", "N", "curv")] <- sapply(data[, c("x", "N", "curv")], function(x) as.numeric(as.character(x)))
