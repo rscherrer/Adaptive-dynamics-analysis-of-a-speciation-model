@@ -457,7 +457,7 @@ assuming that the per capita growth rates $r^*_j$ have the same sign, and whose 
 
 which is also positive. Therefore, the curvature of the fitness function $\partial^2 \lambda / \partial y^2$ at equilibrium depends negatively on the sexual selection coefficient $\alpha$, i.e. assortative mating brings stabilizing sexual selection into the evolutionary dynamics.
 
-\paragraph{Convergence stability -- There is a problem in those derivations but I have not found it yet} Last, attainability, or convergence stability, of an equilibrium $x^*$ is guaranteed if the selection gradient favors increasing $x$ when $x < x^*$ but decreasing $x$ when $x > x^*$, that is
+\paragraph{Convergence stability} Last, attainability, or convergence stability, of an equilibrium $x^*$ is guaranteed if the selection gradient favors increasing $x$ when $x < x^*$ but decreasing $x$ when $x > x^*$, that is
 
 \begin{equation}
     \frac{\partial G}{\partial \hat{x}}\bigg|_{\hat{x}=x^*} < 0
@@ -545,17 +545,6 @@ which are third-degree rational equations in $N^*_1$ and $N^*_2$, which we could
 
 We numerically explored phenotype space for evolutionary equilibria $x^*$ by solving the root of the fitness gradient given in Equation \ref{eq:fitness_gradient_expression} across a range of parameter combinations. For each equilibrium we assessed its convergence and evolutionary stability by evaluating the fitness curvature (Equation \ref{eq:fitness_curvature_equilibrium_expression}) and the change in the direction of the gradient, respectively. Convergent stable but evolutionarily unstable equilibria were classified as branching points. The procedure is shown in the accompanying \textit{Mathematica} notebook. The results of our exploration of parameter space are shown in Figure \ref{fig:adaptive_dynamics}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/branching_points}
-    \caption{Branching throughout parameter space for three values of the dispersal rate $m$. Sexual selection increases the stability of evolutionary equilibria and therefore turns branching points into stable strategies. Shades of grey indicate the highest tested level $\alpha$ of sexual selection at which branching still occurs.}
-    \label{fig:adaptive_dynamics}
-\end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/branching_points_combined.png}
-    \caption{Existence and attainability of a branching point through parameter space, when starting at a trait value of $x = -1$. Even if a branching point may exist, a population starting off as a specialist may not be able to reach it.}
-    \label{fig:adaptive_dynamics2}
-\end{figure}
+
 
