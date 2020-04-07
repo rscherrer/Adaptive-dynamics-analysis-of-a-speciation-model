@@ -1,13 +1,19 @@
+# Map the adaptive dynamics of the two-patch model
+
 rm(list = ls())
 
-# Here we make figures to show the outcome of the adaptive dynamics across parameter
-# space, from data generated in Mathematica.
+# Here we produce maps showing where branching occurs across parameter space
+# The maps are split in several values of the dispersal rate
+# For each map we plot in shades of grey the realized branching when starting with an initial trait value of -1
+# And we add lines to show the domain where branching can occur in theory, but is not necessarily reachable
+# Sexual selection changes the stability of the branching point, so we overlay the figures for different
+# intensities of sexual selection (if branching occurs at a high level of sexual selection, it also occurs 
+# at lower levels)
+# The data were generated in Mathematica
 
 library(tidyverse)
 library(cowplot)
 library(AdaptiveDynamicsSpeciation)
-
-#### Two-patch model ####
 
 # Load the data
 numerics <- c("a", "b", "h", "s", "d", "m", "alpha", "x", "N1", "N2", "curv")
@@ -90,31 +96,4 @@ p <- p + geom_line(data = smr. %>% group_by(h, m) %>% summarize(s = max(s)), aes
 p  
 
 ggsave("figures/map_branching_points.png", p, width = 7, height = 3, dpi = 300)
-
-
-
-
-################
-
-#### One-patch model ####
-
-numerics <- c("a1", "a2", "b", "s", "d", "alpha", "x", "N", "curv")
-data <- do.call(rbind, list(
-  read.csv("data/adaptive_dynamics_patch1.csv") %>% mathematica2r(numerics = numerics) %>% mutate(patch = 1),
-  read.csv("data/adaptive_dynamics_patch2.csv") %>% mathematica2r(numerics = numerics) %>% mutate(patch = 2)
-)) %>%
-  
-  # Sexual selection has no influence on the results here (probably can prove that)
-  filter(alpha == 0) %>%
-  
-  # Evaluate habitat symmetry
-  mutate(a = max(a1, a2), h = a1 / a2) %>%
-  mutate(h = replace(h, h > 1, (a2 / a1)[h > 1]))
-
-p1 <- plot_divergence_map(data, xstart = 0, keep_legend = FALSE)
-p2 <- plot_divergence_map(data, xstart = -1)
-p <- plot_grid(p1, p2, labels = c("A", "B"), rel_widths = c(0.8, 1.2))
-p 
-
-ggsave("figures/divergence_across_patches.png", p, width = 7, height = 3, dpi = 300)
 
