@@ -15,8 +15,7 @@ data <- do.call("rbind", list(
   read.csv("data/pip3.csv") %>% mutate(s = 1),
   read.csv("data/pip4.csv") %>% mutate(s = 1.5),
   read.csv("data/pip5.csv") %>% mutate(s = 2),
-  read.csv("data/pip6.csv") %>% mutate(s = 2.5),
-  read.csv("data/pip7.csv") %>% mutate(s = 3)
+  read.csv("data/pip6.csv") %>% mutate(s = 2.5)
 ))
 
 s_labels <- make_facet_labels(data, 's')
@@ -34,5 +33,5 @@ p <- ggplot(data, aes(x = x, y = y, fill = lambda > 1)) +
   labs(fill = "Mutant invades")
 p
 
-ggsave("figures/pairwise_invasibility_plots.png", p, width = 8, height = 2.3, dpi = 300)
+ggsave("figures/pairwise_invasibility_plots.png", p, width = 7, height = 2.3, dpi = 300)
 
