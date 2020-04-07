@@ -69,6 +69,30 @@ where $R^*_{ij}$ is the equilibrium concentration of resource $i$ in patch $j$. 
     R^*_{ij} = \frac{a \, H_{ij}}{b + e_i(\hat{x})\,N_j}
 \end{equation}
 
+where the attack rate $e_i(x)$ on resource $i$ is given by
+
+\begin{equation}
+    e_i(x) = \exp{(-s\,(x \pm 1)^2)}
+\end{equation}
+
+where the optimal attack rate on the first resource is attained for $x = -1$, the optimal attack rate on the second resource is attained for $x = 1$ and $s$ is the divergent ecological selection coefficient, controlling the strength of the trade-off between the two resources (Fig. \ref{fig:attack_rates}).\\
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[xmin=-3, xmax=3, ymin=0, ymax=1, width=7cm, height=5cm, xtick distance=1,ytick distance=0.1, xlabel=Ecological trait ($x$), ylabel=Attack rate, legend entries={Resource 1, Resource 2}, legend style={font=\large, draw=none, legend pos=outer north east}]
+                \addplot[dashed, blue, samples=100] {exp(-0.5*(x+1)^2)};
+                \addplot[dashed, red, samples=100] {exp(-0.5*(x-1)^2)};
+                \addplot[blue, samples=100] {exp(-2*(x+1)^2)};
+                \addplot[red, samples=100] {exp(-2*(x-1)^2)};
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+    \label{fig:attack_rates}
+    \caption{Attack rate on both resources as a function of the ecological trait. The ecological selection coefficient $s$ determines the strength of the trade-off: solid lines, $s = 0.5$, dashed lines, $s = 2$. Here, $e_{max} = 1$.}
+\end{figure}
+
+
 The attractiveness function is the same as the assortative mating function in Equation \ref{eq:assortative_mating}, except that the female mate preference trait $y$ is absent. This is because we are interested in the branching conditions under various degrees of assortative mating and not in the evolution of assortative mating per se. This is also why we do not allow for disassortative mating here. Assortative mating is captured by the sexual selection coefficient $\alpha$ in
 
 \begin{equation}
@@ -441,6 +465,7 @@ which further simplifies to
 
 \begin{equation}
     \frac{\partial^2 \lambda}{\partial y^2}\bigg|_* = \frac{1}{2}\,\Bigg(\frac{\overrightarrow{v}^T\,\pmb W\,\overrightarrow{u}}{\overrightarrow{v}^T\,\overrightarrow{u}}\,\frac{\partial^2 A}{\partial y}\Bigg)_* = -\alpha \, \Bigg(\frac{\overrightarrow{v}^T\,\pmb W\,\overrightarrow{u}}{\overrightarrow{v}^T\,\overrightarrow{u}}\Bigg)_*
+    \label{eq:curvature_final}
 \end{equation}
 
 where 
