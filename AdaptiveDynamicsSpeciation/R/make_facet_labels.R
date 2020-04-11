@@ -4,6 +4,8 @@
 #'
 #' @param data The dataset
 #' @param varname The variable used for facetting
+#' 
+#' @export
 
 make_facet_labels <- function(data, varname) {
 

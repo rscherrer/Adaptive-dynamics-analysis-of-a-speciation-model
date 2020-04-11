@@ -19,16 +19,16 @@ data <- do.call(rbind, list(
   read.csv("data/adaptive_dynamics_patch2.csv") %>% mathematica2r(numerics = numerics) %>% mutate(patch = 2)
 )) %>%
   
-  # Sexual selection has no influence on the results here (probably can prove that)
-  filter(alpha == 0) %>%
-  
   # Evaluate habitat symmetry
   mutate(a = max(a1, a2), h = a1 / a2) %>%
   mutate(h = replace(h, h > 1, (a2 / a1)[h > 1]))
 
-p1 <- plot_divergence_map(data, xstart = 0, keep_legend = FALSE)
-p2 <- plot_divergence_map(data, xstart = -1)
-p <- plot_grid(p1, p2, labels = c("A", "B"), rel_widths = c(0.8, 1.2))
+# Summarize and make a nice figure
+p1 <- plot_divergence_map(data, xstart = 0)
+leg <- get_legend(p1)
+p1 <- p1 + theme(legend.position = "none")
+p2 <- plot_divergence_map(data, xstart = -1) + theme(legend.position = "none")
+p <- plot_grid(plot_grid(p1, p2, labels = c("A", "B")), leg, nrow = 2, rel_heights = c(5, 1))
 p 
 
 ggsave("figures/divergence_across_patches.png", p, width = 7, height = 3, dpi = 300)

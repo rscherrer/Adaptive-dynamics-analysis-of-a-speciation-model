@@ -4,14 +4,12 @@
 \alias{plot_divergence_map}
 \title{Plot divergence map}
 \usage{
-plot_divergence_map(data, xstart, keep_legend = TRUE)
+plot_divergence_map(data, xstart)
 }
 \arguments{
 \item{data}{A dataset of singularities for the one-patch model}
 
 \item{xstart}{The initial trait value}
-
-\item{keep_legend}{Whether to return the legend}
 }
 \description{
 Heatmap of trait divergence between the two patches in the absence of dispersal (one-patch model). A transparent extra layer indicates whether branching occurs within both patch (relevant only if both patches are mirror images of each other).

@@ -16,12 +16,12 @@ library(cowplot)
 library(AdaptiveDynamicsSpeciation)
 
 # Load the data
-numerics <- c("a", "b", "h", "s", "d", "m", "alpha", "x", "N1", "N2", "curv")
+numerics <- c("a", "b", "h", "s", "d", "m", "alpha", "x", "conv", "inv", "n1", "n2")
 data <- do.call("rbind", list(
-  read.csv("data/adaptive_dynamics_m0.001.csv", header = TRUE) %>% mathematica2r(numerics = numerics),
-  read.csv("data/adaptive_dynamics_m0.01.csv", header = TRUE) %>% mathematica2r(numerics = numerics),
-  read.csv("data/adaptive_dynamics_m0.1.csv", header = TRUE) %>% mathematica2r(numerics = numerics)
-))
+  read.csv("data/adaptive_dynamics_m0.001.csv", header = TRUE),
+  read.csv("data/adaptive_dynamics_m0.01.csv", header = TRUE),
+  read.csv("data/adaptive_dynamics_m0.1.csv", header = TRUE)
+)) %>% mathematica2r(numerics = numerics)
 
 # Each observation in the data is a singularity
 # Summarize the data per parameter set
@@ -55,7 +55,7 @@ p <- ggplot(smr., aes(x = h, y = s, fill = as.factor(alpha))) +
   geom_tile() +
   facet_grid(. ~ m, labeller = labeller(m = m_labs)) +
   theme_bw() +
-  scale_fill_manual(values = c(rgb(0.8, 0.8, 0.8), rgb(0.7, 0.7, 0.7), rgb(0.6, 0.6, 0.6))) +
+  scale_fill_manual(values = c(rgb(0.8, 0.8, 0.8), rgb(0.7, 0.7, 0.7), rgb(0.6, 0.6, 0.6), rgb(0.5, 0.5, 0.5))) +
   xlab("Habitat symmetry") +
   ylab("Ecological divergent selection") +
   labs(fill = "Sexual\nselection")
@@ -82,17 +82,19 @@ p <- ggplot(smr.., aes(x = h, y = s, fill = as.factor(alpha))) +
   geom_tile() +
   facet_grid(. ~ m, labeller = labeller(m = m_labs)) +
   theme_bw() +
-  scale_fill_manual(values = c(rgb(0.8, 0.8, 0.8), rgb(0.7, 0.7, 0.7), rgb(0.6, 0.6, 0.6))) +
+  scale_fill_manual(values = c(rgb(0.8, 0.8, 0.8), rgb(0.7, 0.7, 0.7), rgb(0.6, 0.6, 0.6), rgb(0.5, 0.5, 0.5))) +
   xlab("Habitat symmetry") +
   ylab("Ecological divergent selection") +
-  labs(fill = "Sexual\nselection")
+  labs(fill = "Sexual\nselection") +
+  ylim(c(0, 2.5))
 p
 
 # Summarize the relevant information into a nice figure
 p <- p + geom_line(data = smr. %>% group_by(h, m) %>% summarize(s = max(s)), aes(x = h, y = s, fill = NULL), lty = 2) +
-  geom_line(data = smr. %>% filter(alpha == 1) %>% group_by(h, m) %>% summarize(s = max(s)), aes(x = h, y = s, fill = NULL), lty = 3) +
-  geom_line(data = smr. %>% filter(alpha == 0) %>% group_by(h, m) %>% summarize(s = max(s)), aes(x = h, y = s, fill = NULL), lty = 4) +
-  geom_line(data = smr. %>% filter(alpha == 0) %>% group_by(h, m) %>% summarize(s = min(s)), aes(x = h, y = s, fill = NULL), lty = 5)
+  geom_line(data = smr. %>% filter(alpha == 10) %>% group_by(h, m) %>% summarize(s = max(s)), aes(x = h, y = s, fill = NULL), lty = 3) +
+  geom_line(data = smr. %>% filter(alpha == 1) %>% group_by(h, m) %>% summarize(s = max(s)), aes(x = h, y = s, fill = NULL), lty = 4) +
+  geom_line(data = smr. %>% filter(alpha == 0) %>% group_by(h, m) %>% summarize(s = max(s)), aes(x = h, y = s, fill = NULL), lty = 5) +
+  geom_line(data = smr. %>% filter(alpha == 0) %>% group_by(h, m) %>% summarize(s = min(s)), aes(x = h, y = s, fill = NULL), lty = 6)
 p  
 
 ggsave("figures/map_branching_points.png", p, width = 7, height = 3, dpi = 300)
