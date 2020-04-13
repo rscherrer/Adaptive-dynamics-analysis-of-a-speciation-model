@@ -8,6 +8,7 @@ The life cycle of the organisms unfolds in discrete generations. At each generat
 
 \begin{equation}
     W_j(x) = e_1(x) \, R^*_{1j} + e_2(x) \, R^*_{2j}
+    \label{W_j}
 \end{equation}
 
 where $e_i(x)$ is the attack rate of the individual on resource $i$ and $R^*_{ij}$ is the equilibrium resource concentration of resource $i$ in patch $j$. The attack rate of the individual on resource $i$ depend on the ecological trait $x$ as follows
@@ -140,6 +141,20 @@ The within-patch geometric growth rate captures local competition, reproduction 
 \end{equation}
 
 where $W_j(x,\hat{x})$ is the reproductive success in patch $j$ of a mutant with trait value $x$ in a resident population with trait value $\hat{x}$, and $A(x, \hat{x})$ is the attractiveness of a male mutant to a resident female. The factor between the square brackets is the number of offspring produced by the mutant population. The first term within this factor is the number of offspring directly produced by mutant females, $W_j(x, \hat{x})$. The second term is the number of offspring contributed for by males, who do not produce offspring directly but contribute to the number of offspring their mated partner produces. Here, we assume that the mutant is sufficiently rare so that mutant males will only mate with resident females and thus contribute to $W_j(\hat x, \hat x)$ offspring. This reproductive output is weighed by the mating success of the males, which is their reproductive success on the male market $W(x, \hat{x})$, times their attractiveness to a resident female $A(x, \hat{x})$, relative to the mating success of the resident males, $W_j(\hat x, \hat x)\,A(\hat x, \hat x)$. Finally, in a haploid system with Mendelian inheritance, only half of the offspring of mutants mating with residents will carry the mutant allele.\\
+
+Here, we assume that the mutant is rare enough so that only the resident affects the resource dynamics. The reproductive success of a mutant is therefore
+
+\begin{equation}
+    W_j(x, \hat x) = e_1(x)\,R_{1j}^*(\hat x) + e_2(x)\,R_{2j}^*(\hat x)
+\end{equation}
+
+where the equilibrium resource concentrations depend on the resident trait value,
+
+\begin{equation}
+    R_{ij}^*(\hat x) = \frac{a\,H_{ij}}{b + N_j^*(\hat x) \, e_i(\hat x)}
+\end{equation}
+
+where $N_j^*(\hat x)$ is the equilibrium population density of the resident in patch $j$.\\
 
 Given that $A(\hat{x}, \hat{x}) = 1$, Equation \ref{eq:growth_rate} simplifies to
 
