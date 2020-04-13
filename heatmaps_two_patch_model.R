@@ -18,17 +18,17 @@ library(AdaptiveDynamicsSpeciation)
 # Load the data
 numerics <- c("a", "b", "h", "s", "d", "m", "alpha", "x", "conv", "inv", "n1", "n2")
 data <- do.call("rbind", list(
-  read.csv("data/adaptive_dynamics_m0.001.csv", header = TRUE),
-  read.csv("data/adaptive_dynamics_m0.01.csv", header = TRUE),
-  read.csv("data/adaptive_dynamics_m0.1.csv", header = TRUE)
+  read.csv("data/adaptive_dynamics_m_0.001.csv", header = TRUE),
+  read.csv("data/adaptive_dynamics_m_0.01.csv", header = TRUE),
+  read.csv("data/adaptive_dynamics_m_0.1.csv", header = TRUE)
 )) %>% mathematica2r(numerics = numerics)
 
 # Each observation in the data is a singularity
 # Summarize the data per parameter set
 smr <- data %>% group_by(a, b, h, s, d, m, alpha) %>%
   predict_adaptive_dynamics(xstart = -1) %>%
-  select(a, b, h, s, d, m, alpha, anybp, xreached, conv, inv) %>%
-  mutate(branching = conv & inv)
+  select(a, b, h, s, d, m, alpha, anybp, xreached, convergent, invasible) %>%
+  mutate(branching = convergent & invasible)
 
 # Facet labels
 m_labs <- make_facet_labels(smr, "m")

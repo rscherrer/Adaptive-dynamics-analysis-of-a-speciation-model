@@ -12,7 +12,8 @@ predict_adaptive_dynamics <- function(data, xstart) {
   library(tidyverse)
 
   data %>% mutate(
-    isbp = isconv & curv > 0,
+    isconv = conv < 0,
+    isbp = isconv & inv > 0,
     isabove = x > xstart,
     isbelow = x <= xstart,
     distance = abs(x - xstart)
@@ -35,8 +36,8 @@ predict_adaptive_dynamics <- function(data, xstart) {
 
       # Which are reached and are they evolutionarily stable?
       xreached = ifelse(ireached %in% c(NA, -Inf, Inf), ireached, x[ireached]),
-      conv = ifelse(ireached %in% c(NA, -Inf, Inf), NA, isconv[ireached]),
-      inv = ifelse(ireached %in% c(NA, -Inf, Inf), NA, curv[ireached] > 0)
+      convergent = ifelse(ireached %in% c(NA, -Inf, Inf), NA, isconv[ireached]),
+      invasible = ifelse(ireached %in% c(NA, -Inf, Inf), NA, inv[ireached] > 0)
 
     )
 }

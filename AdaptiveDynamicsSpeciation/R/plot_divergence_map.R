@@ -17,8 +17,8 @@ plot_divergence_map <- function(data, xstart) {
     # Evaluate the attained equilibrium for each parameter set in each patch
     group_by(a, h, b, s, d, alpha, patch) %>%
     predict_adaptive_dynamics(xstart = xstart) %>%
-    select(a, h, b, s, d, alpha, patch, anybp, xreached, conv, inv) %>%
-    mutate(branching = conv & inv) %>%
+    select(a, h, b, s, d, alpha, patch, anybp, xreached, convergent, invasible) %>%
+    mutate(branching = convergent & invasible) %>%
 
     # Calculate the difference between patches
     group_by(a, h, b, s, d, alpha) %>%
