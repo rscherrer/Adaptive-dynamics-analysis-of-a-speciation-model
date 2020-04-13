@@ -1,16 +1,16 @@
-We model a population of sexual organisms evolving in a landscape with two habitat patches connected by dispersal. Two resources are available to the organisms to feed on, and reproductive success is determined by the attack rates of the organisms on the resources. Attack rates on the two resources are determined by an underlying quantitative ecological trait $x$, which is subject to a trade-off so as to favor ecological divergence into two resource specialist strategies. The trait is underlain by a single haploid locus with a continuum of alleles. The ecological trait is also be subject to sexual selection in the form of assortative mating, where females tend to prefer mates with more similar trait values.
+We model a population of sexual organisms evolving in a landscape with two habitat patches connected by dispersal. Two resources are available to the organisms to feed on, and reproductive success is determined by the attack rates of the organisms on the resources. Attack rates on the two resources are determined by an underlying quantitative ecological trait $x$, which is subject to a trade-off so as to favor ecological divergence into two resource specialist strategies. The trait is underlain by a single haploid locus with a continuum of alleles. The ecological trait is also subject to sexual selection in the form of assortative mating, where females tend to prefer mates with more similar trait values.
 
 \subsection*{Life cycle}
 
 The life cycle of the organisms unfolds in discrete generations. At each generation the population goes through a phase of competition for the limited resources, followed by reproduction, survival and dispersal. Population size is variable and generations overlap.
 
-\paragraph{Competition} Individuals compete for the resources available in their local habitat patch. The competitive ability of an individual depends on its trait value $x$ and determines its reproductive success, or fitness $W_j(x)$ in patch $j$, as follows:
+\paragraph{Competition} Individuals compete for the resources available in their local habitat-patch. The competitive ability of an individual depends on its trait value $x$ and determines its reproductive success, or fitness $W_j(x)$ in patch $j$, as follows:
 
 \begin{equation}
     W_j(x) = e_1(x) \, R^*_{1j} + e_2(x) \, R^*_{2j}
 \end{equation}
 
-where $e_i(x)$ is the attack rate of individual $k$ on resource $i$ and $R^*_{ij}$ is the equilibrium resource concentration of resource $i$ in patch $j$. The attack rates of individuals on resource $i$ depend on the ecological trait $x$ as follows
+where $e_i(x)$ is the attack rate of the individual on resource $i$ and $R^*_{ij}$ is the equilibrium resource concentration of resource $i$ in patch $j$. The attack rate of the individual on resource $i$ depend on the ecological trait $x$ as follows
 
 \begin{equation}
     e_i(x) = \exp{(-s \, (x \pm 1)^2)}
@@ -35,7 +35,7 @@ where $e_i(x)$ is the attack rate of individual $k$ on resource $i$ and $R^*_{ij
     \caption{Attack rate on both resources as a function of the ecological trait. The ecological selection coefficient $s$ determines the strength of the trade-off: dotted lines, $s = 0.1$, dashed lines, $s = 0.5$, solid lines, $s = 2$.}
 \end{figure}
 
-where $s$ is the ecological divergent selection coefficient. The respective attack rates on the first and second resource are maximized at values of $x$ of $-1$ and $+1$, which represent specialist strategies. The attack rates are subject to a trade-off, such that organisms cannot have a high payoff on both resources, and whose strength is controlled by $s$. The stronger this ecological trade-off, the more generalist phenotypes, i.e. values of $x$ near zero, suffer reduced attack rates relative to specialist competitors (Fig. \ref{fig:attack_rates}). If $s = 0$ the ecological trait does not affect the attack rates, i.e. there is no selection.\\
+where $s$ is the ecological divergent selection coefficient. The respective attack rates on the first and second resource are maximized at values of $x$ of $-1$ and $+1$, which represent specialist strategies. The attack rates are subject to a trade-off whose strength is controlled by $s$, such that organisms cannot have a high payoff on both resources. The stronger this ecological trade-off, the more generalist phenotypes, i.e. values of $x$ near zero, suffer reduced attack rates relative to specialist competitors (Fig. \ref{fig:attack_rates}). If $s = 0$ the ecological trait does not affect the attack rates, i.e. there is no selection.\\
 
 The resources flow through the landscape like through a chemostat according to the following dynamics:
 
@@ -44,7 +44,7 @@ The resources flow through the landscape like through a chemostat according to t
     \label{eq:resource_dynamics}
 \end{equation}
 
-where $R_{ij}$ is the concentration of resource $i$ in habitat-patch $j$, $a$ is the absolute rate of resource inflow, $b$ is the relative rate of resource outflow, $H_{ij}$ is a coefficient of symmetry in rates of resource inflow between the two patches, and $e_i(x_k)$ is the attack rate of individual $k$ on resource $i$. The sum of attack rates across the set $S_j$ of individuals living in patch $j$ symbolizes the consumption of the resource by the organisms. The habitat symmetry factor $H_{ij}$ controls the reduction in inflow of resource 2 relative to resource 1 in patch 1, and of resource 1 relative to resource 2 in patch 2, such that the two habitat patches are mirror images of each other with respect to resource inflow,
+where $R_{ij}$ is the concentration of resource $i$ in habitat-patch $j$, $a$ is the absolute rate of resource inflow, $b$ is the relative rate of resource outflow, $H_{ij}$ is a coefficient of symmetry in rates of resource inflow between the two patches, and $e_i(x_k)$ is the attack rate of individual $k$ on resource $i$. The sum of attack rates across the set $S_j$ of individuals living in patch $j$ symbolizes the local consumption of the resource by the organisms. The habitat symmetry factor $H_{ij}$ controls the reduction in inflow of resource 2 relative to resource 1 in patch 1, and of resource 1 relative to resource 2 in patch 2, such that the two habitat patches are mirror-images of each other with respect to resource inflow,
 
 \begin{equation}
     H = 
@@ -62,14 +62,14 @@ We assume that the dynamics of the resources are fast relative to the population
     R^*_{ij} = \frac{a \, H_{ij}}{b + \sum_{k \in S_j} e_i(x_k)}
 \end{equation}
 
-\paragraph{Reproduction} Females and males encounter each other and mate within patches. We assume a balanced sex ratio. The probability that female $\female$ accepts encountered male $\male$, i.e. the attractiveness of male $\male$ to female $\female$, depends on its ecological trait value and is given by the assortative mating probability function
+\paragraph{Reproduction} Females and males encounter each other and mate within patches. We assume a balanced sex ratio. The probability that female $\female$ accepts encountered male $\male$, i.e. the attractiveness of male $\male$ to female $\female$, depends on both their ecological trait values and is given by the assortative mating probability function
 
 \begin{equation}
     A(x_{\male}, x_{\female}) = \exp{\big(-\alpha \, (x_{\male} - x_{\female})^2\big)}
     \label{eq:assortative_mating}
 \end{equation}
 
-where $\alpha$ is the sexual selection coefficient, scaling the sensitivity of females to deviations in ecological trait values. Females have a* stronger preference for more ecologically similar males as $\alpha$ increases (Fig. \ref{fig:mating_probability}). When $\alpha = 0$, females mate at random.\\ 
+where $\alpha$ is the sexual selection coefficient, scaling the sensitivity of females to deviations in ecological trait values. Females have a stronger preference for more ecologically similar males as $\alpha$ increases (Fig. \ref{fig:mating_probability}). When $\alpha = 0$, females mate at random.\\ 
 
 \begin{figure}
     \begin{center}
@@ -86,7 +86,7 @@ where $\alpha$ is the sexual selection coefficient, scaling the sensitivity of f
     \caption{Mating probability, or attractiveness, of a male with trait value $x_i$ to a female with trait value $x_j$ for different values of the sexual selection coefficient $\alpha$.}
 \end{figure}
 
-The competitive abilities $W_j$ affect the reproductive output of males and females differently. In females, $W_j(x_{\female})$ is the number of offspring that a female can produce. In males, $W_j(x_{\male})$ is analogous the activity of a male on the mating market, and corresponds to the rate of encounter of a male.
+The competitive abilities $W_j$ affect the reproductive output of males and females differently. In females, $W_j(x_{\female})$ is the number of offspring that a female produces. In males, $W_j(x_{\male})$ is the rate of encounter by females, and is analogous to the activity of the male on the mating market.
 
 \paragraph{Survival} Newborns of the current generation all survive to the next generation and become sexually mature. Generations overlap and adults of the current generation survive with probability $1-d$, where $d$ is the per capita death rate.
 
@@ -94,23 +94,13 @@ The competitive abilities $W_j$ affect the reproductive output of males and fema
 
 \subsection*{Adaptive dynamics}
 
-We use adaptive dynamics to analyze the evolutionary outcome of our model under the effects of natural and sexual selection. Adaptive dynamics theory is concerned with the conditions under which an initially rare mutant can spread in a population of resident phenotypes (cite Geritz and Metz). The derivations are simplified by assuming that the resident population is monomorphic with respect to the evolving trait, here $x$. In a model with discrete-time population dynamics, a mutant will spread if its geometric growth rate, or invasion fitness, is higher the growth rate of the resident. Assuming that mutations are rare relative to the population dynamics, that selection is the only force at play (no drift) and that the mutant allele is only slightly deviating from the resident allele in phenotype, a mutant that spreads will invade the population and become the new resident (cite?). If evolution is limited by mutations and occurs through successive allele substitutions, the direction and extent of evolution by selection is described by the selection gradient, which is the change in invasion fitness as the trait value of the mutant changes, given a resident trait value. A positive selection gradient will favor an increase in trait value while a negative selection gradient will favor a decrease. Evolutionary singular strategies are trait values for which the selection gradient is zero, and correspond to either local minima or local maxima in the invasion fitness. A singular strategy that is a local maximum is invasion-proof and is evolutionarily stable strategy under stabilizing selection. A local minimum is a resident trait value that can be invaded by any neighboring mutant and is evolutionarily unstable, that is, it is under disruptive selection and may be a branching point. The evolutionary stability of a singular strategy is given by the curvature of the invasion fitness function at the singular trait value. Not every singular strategy is necessarily attainable through evolution if a population starts off with a different resident trait value. A singular strategy is convergence-stable, or attainable, if it is an attractor for nearby resident trait values. This is the case if the selection gradient pushes for an increase in trait value when slightly below the singular strategy, and for a decrease when slightly above. Otherwise, the singular strategy is an evolutionary repellor, which a population will evolve away from.\\
+We use adaptive dynamics to analyze the evolutionary outcome of our model under the effects of natural and sexual selection. We first describe the dynamics of a mutant arising in a monomorphic population with respect to trait $x$. Taking the geometric growth rate of the mutant as a measure of invasion fitness, we then derive an expression for the selection gradient and the curvature of the fitness function, which can be used to predict the endpoints of the evolutionary dynamics and how they depend on model parameters.
 
-Assuming small and rare mutational steps and a large and monomorphic population with respect to trait $x$, we can derive a selection gradient, which indicates the direction of evolution. We find evolutionary equilibria as values of $x$ where the selection gradient becomes zero. Speciation is favored if selection leads to those equilibria and favors branching, that is, becomes disruptive once there. Those conditions can be evaluated by studying the attainability and the invasion-proofness of the equilibria, using criteria that can be derived from the selection gradient and the curvature of the fitness function. We are searching for branching points, i.e. equilibrium values of trait $x$ towards which directional selection leads but where the fitness landscape becomes a valley once attained, thus invasible by any neighboring mutant. It is important to note that the shape of the fitness landscape can change as a population evolves, due to frequency-dependent selection. Here, frequency-dependence is present through competition for limited resources.\\
+\subsubsection*{Invasion fitness}
 
-We first describe the dynamics of a mutant population and how they depend on model parameters. We derive the invasion fitness as the geometric growth rate of the mutant. Next, we derive an expression for the selection gradient, the curvature of the fitness function and the attainability of the equilibriq. We show that the location of evolutionary equilibria does not depend on sexual selection, but that sexual selection in the form of assortative mating has a stabilizing effect on the evolution of trait $x$ and may counteract branching. Finally, we explore branching conditions across parameter space by numerically evaluating the previously derived functions, using a \textit{Mathematica} notebook provided in Online Supplements.
+Adaptive dynamics theory is concerned with the conditions under which an initially rare mutant can spread in a population of resident phenotypes (cite Geritz and Metz). The derivations are simplified by assuming that the resident population is monomorphic with respect to the evolving trait, here $x$. In a model with discrete-time population dynamics, a mutant will spread if its geometric growth rate, or invasion fitness, is higher the growth rate of the resident. Assuming that (1) mutations are rare relative to the population dynamics, (2) selection is the only force at play (no drift) and (3) the mutant allele is only slightly deviating from the resident allele in phenotype, a mutant that spreads will invade the population and become the new resident (cite?).\\
 
-\subsection*{Ecological dynamics}
-
-Consider a population of organisms with access to two habitat patches and two resources, just like in our simulation model. The resource dynamics are affected by the consumption by the organisms as in Equation \ref{eq:resource_dynamics}, except that here we assume the population to be monomorphic with respect to the ecological trait $x$. Equation \ref{eq:resource_dynamics} then becomes
-
-\begin{equation}
-    \frac{dR_{ij}}{dt} = a \, H_{ij} - (b + e_i(x)\, N_j ) \, R_{ij}
-\end{equation}
-
-where $R_{ij}$ is the concentration of resource $i$ in patch $j$ and depends on the number of individuals $N_j$ in patch $j$. The other parameters are described in the main text. The attack rates $e_i(x)$ are given in Equation \ref{eq:attack_rates} and are subject to a trade-off controlled by the ecological selection coefficient $s$ (Fig. \ref{fig:attackrates}).\\
-
-The population dynamics of a rare mutant with ecological trait value $x$ arising in a monomorphic resident population with trait value $\hat{x}$ are
+We can derive a recursion equation for the population dynamics of a monomorphic resident population of our study organism based on the aforementioned life cycle:
 
 \begin{equation}
     \overrightarrow{N'}_{t+1} = \pmb{\Lambda} \, \overrightarrow{N'}_t
@@ -132,7 +122,7 @@ where $\pmb{M}$ is the migration matrix, given by
     \end{pmatrix}
 \end{equation}
 
-where $m$ is the migration rate, and $\pmb{Q}$ is the matrix of local per capita growth rates,
+and $\pmb{Q}$ is the matrix of local geometric per capita growth rates,
 
 \begin{equation}
     \pmb{Q} =
@@ -149,52 +139,7 @@ The within-patch geometric growth rate captures local competition, reproduction 
     \label{eq:growth_rate}
 \end{equation}
 
-where $d$ is the per capita death rate, $W_j(x,\hat{x})$ is the reproductive success of a mutant with trait value $x$ in a resident population with trait $\hat{x}$ in patch $j$, and $A(x, \hat{x})$ is the attractiveness of a male mutant for a resident female.\\
-
-The term $1-d$ represents the survival of adults from one generation to the next. The rest of the equation represents the production of mutant offspring by both males and female, respectively. In females, the reproductive success $W(x, \hat{x})$ directly translates into number of offspring. Males, on the other hand, do not produce offspring directly. Given that the mutant is rare, we assume that mutants only mate with residents, and a mutant male will therefore only contribute to the offspring of a resident female, $W(\hat{x}, \hat{x})$. Males are also subject to sexual selection. Their reproductive output is weighed by their mating success. Male mating success depends on the attractiveness of the male for a resident female, $A(x, \hat{x})$, and on the reproductive success of the male $W(x, \hat{x})$, which in males determines their activity on the mating market. The mating success of the mutant is normalized by the mating success of the resident. Finally, in a haploid system with Mendelian segregation, only half of the offspring of mutants mating with residents will be of mutant phenotype.\\
-
-The reproductive success is the competitive ability of the individual when exploiting the resources,
-
-\begin{equation}
-    W_j(x, \hat{x}) = e_1(x) \, R^*_{1j} + e_2(x) \, R^*_{2j}
-\end{equation}
-
-where $R^*_{ij}$ is the equilibrium concentration of resource $i$ in patch $j$. Just like in our simulation model we assume fast resource dynamics relative to the population of organisms. We also assume that mutants are rare enough that they have no effect on the equilibrium resource dynamics, such that
-
-\begin{equation}
-    R^*_{ij} = \frac{a \, H_{ij}}{b + e_i(\hat{x})\,N_j}
-\end{equation}
-
-where the attack rate $e_i(x)$ on resource $i$ is given by
-
-\begin{equation}
-    e_i(x) = \exp{(-s\,(x \pm 1)^2)}
-\end{equation}
-
-where the optimal attack rate on the first resource is attained for $x = -1$, the optimal attack rate on the second resource is attained for $x = 1$ and $s$ is the divergent ecological selection coefficient, controlling the strength of the trade-off between the two resources (Fig. \ref{fig:attack_rates}).\\
-
-\begin{figure}
-    \begin{center}
-        \begin{tikzpicture}
-            \begin{axis}[xmin=-3, xmax=3, ymin=0, ymax=1, width=7cm, height=5cm, xtick distance=1,ytick distance=0.1, xlabel=Ecological trait ($x$), ylabel=Attack rate, legend entries={Resource 1, Resource 2}, legend style={font=\large, draw=none, legend pos=outer north east}]
-                \addplot[dashed, blue, samples=100] {exp(-0.5*(x+1)^2)};
-                \addplot[dashed, red, samples=100] {exp(-0.5*(x-1)^2)};
-                \addplot[blue, samples=100] {exp(-2*(x+1)^2)};
-                \addplot[red, samples=100] {exp(-2*(x-1)^2)};
-            \end{axis}
-            \end{tikzpicture}
-        \end{center}
-    \label{fig:attack_rates}
-    \caption{Attack rate on both resources as a function of the ecological trait. The ecological selection coefficient $s$ determines the strength of the trade-off: solid lines, $s = 0.5$, dashed lines, $s = 2$. Here, $e_{max} = 1$.}
-\end{figure}
-
-The attractiveness function is the same as the assortative mating function in Equation \ref{eq:assortative_mating}, except that the female mate preference trait $y$ is absent. This is because we are interested in the branching conditions under various degrees of assortative mating and not in the evolution of assortative mating per se. This is also why we do not allow for disassortative mating here. Assortative mating is captured by the sexual selection coefficient $\alpha$ in
-
-\begin{equation}
-    A(x, \hat{x}) = \exp{(-\alpha \, (x - \hat{x})^2)}
-\end{equation}
-
-
+where $W_j(x,\hat{x})$ is the reproductive success in patch $j$ of a mutant with trait value $x$ in a resident population with trait value $\hat{x}$, and $A(x, \hat{x})$ is the attractiveness of a male mutant to a resident female. The factor between the square brackets is the number of offspring produced by the mutant population. The first term within this factor is the number of offspring directly produced by mutant females, $W_j(x, \hat{x})$. The second term is the number of offspring contributed for by males, who do not produce offspring directly but contribute to the number of offspring their mated partner produces. Here, we assume that the mutant is sufficiently rare so that mutant males will only mate with resident females and thus contribute to $W_j(\hat x, \hat x)$ offspring. This reproductive output is weighed by the mating success of the males, which is their reproductive success on the male market $W(x, \hat{x})$, times their attractiveness to a resident female $A(x, \hat{x})$, relative to the mating success of the resident males, $W_j(\hat x, \hat x)\,A(\hat x, \hat x)$. Finally, in a haploid system with Mendelian inheritance, only half of the offspring of mutants mating with residents will carry the mutant allele.\\
 
 Given that $A(\hat{x}, \hat{x}) = 1$, Equation \ref{eq:growth_rate} simplifies to
 
@@ -202,31 +147,33 @@ Given that $A(\hat{x}, \hat{x}) = 1$, Equation \ref{eq:growth_rate} simplifies t
     r_j(x, \hat{x}) = 1 - d + \frac{1}{2} \, W(x, \hat{x}) \, \big(1 + A(x, \hat{x})\big)
 \end{equation}
 
-In the following we use the convention $r_j(x, \hat{x}) = r_j$ for readability. The invasion fitness, i.e. the long-term growth rate of the mutant, is the leading eigenvalue of the transition matrix $\pmb{\Lambda}$,
+The invasion fitness, i.e. the long-term growth rate of a mutant arising in a resident population at its demographic equilibrium, is the leading eigenvalue of the transition matrix $\pmb{\Lambda}$,
 
 \begin{equation}
     \lambda(x, \hat{x}) = \frac{1}{2} \bigg[(1-m) \, (r_1 + r_2) + \sqrt{(1-m)^2 \, (r_1^2 - 2 \, r_1 \, r_2 + r_2^2) + 4 \, m^2 \, r_1 \, r_2} \bigg]
     \label{eq:invasion_fitness}
 \end{equation}
 
-where $\lambda$ is the growth rate of a mutant arising in a resident population at its demographic equilibrium, as defined by trait value $\hat{x}$. The mutant can invade and become the new resident if $\lambda(x, \hat{x}) > 1$, otherwise the mutant goes extinct. Note that $\lambda(\hat{x}, \hat{x}) = 1$. In the following we use the notation $\lambda$ for $\lambda(x, \hat{x})$.
+where $r_j = r_j(x, \hat x)$. A mutant with trait $x$ can invade a resident population with trait $\hat x$ if its invasion fitness is greater than one. Next, we use the invasion fitness to derive the direction of evolution by selection.
 
-\subsection*{Adaptive dynamics}
+\subsubsection*{Selection gradient}
 
-\paragraph{Selection gradient} The direction of evolution by selection, assuming small mutational steps and a very large population, is given by the selection gradient,
+If evolution is limited by mutations and occurs through successive allele substitutions, the direction and extent of evolution by selection is described by the selection gradient, which is the change in invasion fitness as the trait value of the mutant changes, given a resident trait value:
 
 \begin{equation}
     G(\hat{x}) = \frac{\partial \lambda}{\partial x}\bigg|_{x=\hat{x}}
 \end{equation}
 
-which is the derivative of the invasion fitness with respect to the mutant phenotype, evaluated at the resident phenotype. Differentiating Equation \ref{eq:invasion_fitness} is possible but cumbersome, hence we find an expression for the selection gradient using the rule:
+A positive selection gradient will favor an increase in trait value while a negative selection gradient will favor a decrease. This could eventually lead to an evolutionary steady-state, but could also trigger a runaway to infinite values of trait $x$.\\
+
+The derivative of the invasion fitness can be written as:
 
 \begin{equation}
    \frac{\partial \lambda}{\partial x}\bigg = \frac{1}{\overrightarrow{v}^T\,\overrightarrow{u}} \, \bigg( \overrightarrow{v}^T \, \frac{\partial \pmb{\Lambda}}{\partial x} \, \overrightarrow{u} \bigg)
    \label{eq:deriv_fitness}
 \end{equation}
 
-(citation) where $\overrightarrow{v}$ and $\overrightarrow{u}$ are left and right eigenvectors, respectively, of the transition matrix $\pmb{\Lambda}$ associated with the dominant eigenvalue $\lambda$. Possible such eigenvectors are
+(Otto and Day) where $\overrightarrow{v}$ and $\overrightarrow{u}$ are left and right dominant eigenvectors, respectively, of the transition matrix $\pmb{\Lambda}$. Possible such eigenvectors are
 
 \begin{equation}
     \overrightarrow{v} = 
@@ -247,37 +194,37 @@ and
     \end{pmatrix}
 \end{equation}
 
-The derivative of the transition matrix $\pmb\Lambda$ with respect to $x$ is
+where $\lambda = \lambda(x, \hat x)$. The derivative of the transition matrix $\pmb\Lambda$ with respect to $x$ is
 
 \begin{equation}
     \frac{\partial \pmb{\Lambda}}{\partial x} = \pmb{M} \, \frac{\partial \pmb{Q}}{\partial x}
 \end{equation}
 
-where $\partial \pmb{Q} / \partial x$ is a diagonal matrix whose elements are, given for patch $j$,
+where $\partial \pmb{Q} / \partial x$ is a diagonal matrix whose elements are, the derivatives of the local geometric growth rates in each patch $j$,
 
 \begin{equation}
     \frac{\partial r_j}{\partial x} = \frac{1}{2} \, \bigg[\frac{\partial W_j}{\partial x} \, (1 + A(x, \hat{x})) + \frac{\partial A}{\partial x} \, W_j(x, \hat{x})\bigg]
     \label{eq:deriv_local_growth}
 \end{equation}
 
-where
+where the derivative of the attractiveness function is
 
 \begin{equation}
     \frac{\partial A}{\partial x} = -2 \, \alpha \, (x - \hat{x}) \, A(x, \hat{x})
 \end{equation}
 
-Because the selection gradient is evaluated at the resident trait value, where $\partial A / \partial x = 0$ and $A(\hat{x},\hat{x}) = 1$, Equation \ref{eq:deriv_local_growth} reduces to
+At the resident trait value, $\partial A / \partial x = 0$ and $A(\hat{x},\hat{x}) = 1$, and so the derivative of the local growth rate reduces to
 
 \begin{equation}
     \frac{\partial r_j}{\partial x}\bigg|_{x=\hat{x}} = \frac{\partial W_j}{\partial x}\bigg|_{x=\hat{x}} 
 \end{equation}
 
-Also, given $\lambda(\hat{x}, \hat{x}) = 1$, the eigenvectors $\overrightarrow{v}$ and $\overrightarrow{u}$ evaluated at the resident simplify to
+We also know that $\lambda(\hat{x}, \hat{x}) = 1$, so the eigenvectors $\overrightarrow{v}$ and $\overrightarrow{u}$ evaluated at the resident simplify to
 
 \begin{equation}
     \hat{\overrightarrow{v}} = 
     \begin{pmatrix}
-        1 - (1-m)\hat{r}_2\\
+        1 - (1-m)\,\hat{r}_2\\
         m \, \hat{r}_2
     \end{pmatrix}
     \label{eq:left_eigenvector_resident}
@@ -288,13 +235,13 @@ and
 \begin{equation}
     \hat{\overrightarrow{u}} = 
     \begin{pmatrix}
-        1 - (1-m)\hat{r}_2\\
+        1 - (1-m)\,\hat{r}_2\\
         m \, \hat{r}_1
     \end{pmatrix}
     \label{eq:right_eigenvector_resident}
 \end{equation}
 
-where 
+where the local growth rate of the resident is
 
 \begin{equation}
     \hat{r}_j = r_j(\hat{x}, \hat{x}) = 1 - d + W_j(\hat{x}, \hat{x})
@@ -308,30 +255,30 @@ Substituting Equations \ref{eq:left_eigenvector}--\ref{eq:local_growth_resident}
     \label{eq:fitness_gradient_expression}
 \end{equation}
 
-where $\hat{W}_j' = \partial W_j / \partial x |_{x = \hat{x}}$.\\
+where $\hat{W}_j' = \partial W_j / \partial x |_{x = \hat{x}}$. The selection gradient does not involve the sexual selection coefficient $\alpha$, hence, the values of the singular strategies depend only on competition, survival and migration, but not on sexual selection. Next, we show that sexual selection nevertheless affects the evolutionary stability of the singular strategies.
 
-Hence, the selection gradient does not involve the sexual selection coefficient $\alpha$, and is identical to the selection gradient of an asexual model (show this), whose local growth rate is given by Equation \ref{eq:local_growth_resident}. This means that the equilibrium values of ecological trait $x$, those where the selection gradient is zero, depend on competition, survival and migration, but not on sexual selection. We will now show that sexual selection affects the stability of these equilibria.
+\subsubsection*{Evolutionary stability}
 
-\paragraph{Evolutionary stability} The evolutionary stability of an equilibrium trait value $x^*$ depends on the second derivative, or curvature, of the invasion fitness with respect to the mutant phenotype, evaluated at the resident phenotype at evolutionary equilibrium:
+Evolutionary singular strategies are trait values for which the selection gradient is zero, and correspond to either local minima or local maxima in the invasion fitness landscape. A singular strategy that is a local maximum is invasion-proof and is evolutionarily stable. A local minimum is a resident trait value that can be invaded by any neighboring mutant and is evolutionarily unstable, i.e. it is under disruptive selection and promotes the branching and coexistence of multiple trait values. The evolutionary stability of a singular strategy is given by the curvature of the invasion fitness function at the singular trait value,
 
 \begin{equation}
     \frac{\partial^2 \lambda}{\partial x^2}\bigg|_{x=\hat{x}=x^*}
 \end{equation}
 
-If this value is positive, the equilibrium is evolutionarily unstable and the trait value is a fitness minimum, which is a requirement for branching. If this value is negative, the equilibrium is an invasion-proof local maximum, i.e. an evolutionarily stable strategy (ESS) and it cannot branch. It follows from Equation \ref{eq:deriv_fitness} that
+The curvature of the invasion fitness function can be obtained by differentiating its derivative,
 
 \begin{equation}
     \frac{\partial^2 \lambda}{\partial x^2} = \frac{\overrightarrow{v}^T\,\overrightarrow{u}\,\frac{\partial}{\partial x}\,\big(\overrightarrow{v}^T\,\frac{\partial \pmb{\Lambda}}{\partial x}\,\overrightarrow{u}\big) - \frac{\partial}{\partial x} \big( \overrightarrow{v}^T \, \overrightarrow{u} \big) \, \overrightarrow{v}^T \, \frac{\partial \pmb{\Lambda}}{\partial x}\,\overrightarrow{u}}{(\overrightarrow{v}^T\,\overrightarrow{u})^2}
 \end{equation}
 
-which, because
+The selection gradient is zero at the singular strategy, or equilibrium, $x^*$, i.e.
 
 \begin{equation}
     \bigg( \overrightarrow{v}^T\,\frac{
     \partial \pmb \Lambda}{\partial x}\,\overrightarrow{u} \bigg)_* = G(x^*) = 0
 \end{equation}
 
-simplifies, at equilibrium $x^*$, to
+Therefore, the curvature of the fitness function at equilibrium $x^*$, simplifies to
 
 \begin{equation}
     \frac{\partial^2 \lambda}{\partial x^2}\bigg|_* = \Bigg[ \frac{1}{\overrightarrow{v}^T\,\overrightarrow{u}}\,\frac{\partial}{\partial x}\,\bigg(\overrightarrow{v}^T\,\frac{\partial \pmb{\Lambda}}{\partial x}\,\overrightarrow{u}\bigg) \Bigg]_*
@@ -345,7 +292,7 @@ where
     \label{eq:deriv_num_gradient_unevaluated}
 \end{equation}
 
-where the derivatives of the left and right eigenvectors are given by
+where the derivatives of the left and right eigenvectors are
 
 \begin{equation}
     \frac{\partial \overrightarrow{v}}{\partial x} = 
@@ -388,20 +335,20 @@ and
     \label{eq:right_eigenvector_equilibrium}
 \end{equation}
 
-and where the second derivative of the transition matrix is given by 
+The second derivative of the transition matrix $\pmb \Lambda$ is given by 
 
 \begin{equation}
     \frac{\partial^2 \pmb{\Lambda}}{\partial x^2} = \pmb{M} \, \frac{\partial^2 \pmb{Q}}{\partial x^2}
     \label{eq:second_derivative_transition}
 \end{equation}
 
-where $\partial^2 \pmb{Q} / \partial x^2$ is a diagonal matrix whose elements for each patch $j$ are given by differentiating Equation \ref{eq:deriv_local_growth}:
+where $\partial^2 \pmb{Q} / \partial x^2$ is a diagonal matrix whose elements are the second derivatives of the local growth rates for each patch $j$, obtained by differentiating their first-order derivatives in Equation \ref{eq:deriv_local_growth}:
 
 \begin{equation}
     \frac{\partial^2 r_j}{\partial x^2} = \frac{1}{2} \bigg[\frac{\partial^2 W_j}{\partial x^2}\,\big(1+A(x,\hat{x})\big) + 2\,\frac{\partial W_j}{\partial x}\,\frac{\partial A}{\partial x} + \frac{\partial^2 A}{\partial x^2}\,W_j(x,\hat{x})\bigg]
 \end{equation}
 
-where
+where the second derivative of the attractiveness function is
 
 \begin{equation}
     \frac{\partial^2 A}{\partial x^2} = -2\,\alpha\,\big( A(x,\hat{x}) + (x-\hat{x})\,\nicefrac{\partial A}{\partial x} \big)
@@ -413,7 +360,7 @@ which, at equilibrium $x=\hat{x}=x^*$ becomes
     \frac{\partial^2 A}{\partial x^2}\bigg|_{x=\hat{x}=x^*} = -2\,\alpha
 \end{equation}
 
-The second derivatives of the local growth rates therefore simplify to
+The second derivatives of the local growth rates evaluated at equilibrium $x^*$ therefore simplify to
 
 \begin{equation}
     \frac{\partial^2 r_j}{\partial x^2}\bigg|_{x=\hat{x}=x^*}= \frac{\partial^2 W_j}{\partial x^2}\bigg|_{x=\hat{x}=x^*} - \alpha \, W_j(x^*,x^*)
@@ -433,9 +380,11 @@ By substituting Equations \ref{eq:left_eigenvector_resident}, \ref{eq:right_eige
     \label{eq:fitness_curvature_equilibrium_expression}
 \end{equation}
 
-where $W_j^* = W_j(x^*, x^*)$, $W_j''^* = \partial^2 W_j / \partial x^2 |_{x=\hat{x}=x^*}$ and $r_j^* = r_j(x^*, x^*)$.\\
+where $W_j^* = W_j(x^*, x^*)$, $W_j''^* = \partial^2 W_j / \partial x^2 |_{x=\hat{x}=x^*}$ and $r_j^* = r_j(x^*, x^*)$. We used this expression to assess the stability of evolutionary equilibria. We now show that increasing the sexual selection coefficient $\alpha$, i.e. stronger assortative mating, has a stabilizing effect on the singular strategy and may counteract diversification.
 
-We used this expression to assess the stability of evolutionary equilibria. We will now show that the fitness curve gets more concave at equilibrium as the sexual selection coefficient $\alpha$ increases, i.e. that assortative mating has a stabilizing effect on evolutionary equilibria and may prevent branching. For this, assume that the local per capita growth rate $r_j$ depends on two traits, $x$, which affects competitive ability, and $y$, which affects attractiveness. Those two traits are eventually the same, but we split them to study the effect of the ecological trait on ecological and sexual selection separately. We first show that $x$ and $y$ have independent effects on the curvature of the fitness function at equilibrium, that is,
+\subsubsection*{The stabilizing effect of assortative mating}
+
+Assume that the local per capita growth rate $r_j$ depends on two traits: $x$, which affects competitive ability, and $y$, which affects attractiveness. Those two traits are eventually the same, but we split them to study the effect of the ecological trait on ecological and sexual selection separately. We first show that $x$ and $y$ have independent effects on the curvature of the fitness function at equilibrium, that is,
 
 \begin{equation}
     \frac{\partial^2 \lambda}{\partial x \partial y}\bigg|_* = 0
@@ -516,7 +465,7 @@ which also reduces to zero at equilibrium and therefore,
     \frac{\partial^2 \lambda}{\partial x \partial y}\bigg|_* = 0
 \end{equation}
 
-therefore competition and mate choice  have independent effects on the stability of equilibria. The effect of mate choice on the stability of an equilibrium is given by
+Therefore, competition and mate choice have independent effects on the curvature of the fitness function, i.e.e the stability of equilibria. The effect of mate choice on the stability of an equilibrium is given by
 
 \begin{equation}
     \frac{\partial^2 \lambda}{\partial y^2}\bigg|_*
@@ -571,15 +520,17 @@ where
     \overrightarrow{v}^*^T\,\overrightarrow{u}^* = \big(1-(1-m)\,r^*_2\big)^2 + m^2\,r^*_1\,r^*_2 > 0
 \end{equation}
 
-assuming that the per capita growth rates $r^*_j$ have the same sign, and whose sign is therefore given by the numerator,
+assuming that the per capita growth rates $r^*_j$ have the same sign. The sign of the second derivative of $\lambda$ with respect to $y$, evaluated at the equilibrium, is therefore given by the numerator
 
 \begin{equation}
     \overrightarrow{v}^*^T\,\pmb W^*\,\overrightarrow{u}^* = \big(1-(1-m)\,r^*_2\big)^2\,W^*_1 + m^2\,r^*_1\,r^*_2\,W^*_2
 \end{equation}
 
-which is also positive. Therefore, the curvature of the fitness function $\partial^2 \lambda / \partial y^2$ at equilibrium depends negatively on the sexual selection coefficient $\alpha$, i.e. assortative mating brings stabilizing sexual selection into the evolutionary dynamics.
+which is also positive. The curvature of the fitness function $\partial^2 \lambda / \partial y^2$ at equilibrium thus depends negatively on the sexual selection coefficient $\alpha$, indicating that assortative mating stabilizes the evolutionary equilibrium.
 
-\paragraph{Convergence stability} Last, attainability, or convergence stability, of an equilibrium $x^*$ is guaranteed if the selection gradient favors increasing $x$ when $x < x^*$ but decreasing $x$ when $x > x^*$, that is
+\subsubsection*{Convergence stability}
+
+Not every singular strategy is attainable through evolution. A singular strategy is convergence-stable, or attainable, if it is an attractor for nearby resident trait values, i.e. if the selection gradient pushes for an increase in trait value when slightly below the singular strategy, and for a decrease when slightly above. That is, 
 
 \begin{equation}
     \frac{\partial G}{\partial \hat{x}}\bigg|_{\hat{x}=x^*} < 0
@@ -665,8 +616,4 @@ which are third-degree rational equations in $N^*_1$ and $N^*_2$, which we could
 
 \subsection*{Numerical procedures}
 
-We numerically explored phenotype space for evolutionary equilibria $x^*$ by solving the root of the fitness gradient given in Equation \ref{eq:fitness_gradient_expression} across a range of parameter combinations. For each equilibrium we assessed its convergence and evolutionary stability by evaluating the fitness curvature (Equation \ref{eq:fitness_curvature_equilibrium_expression}) and the change in the direction of the gradient, respectively. Convergent stable but evolutionarily unstable equilibria were classified as branching points. The procedure is shown in the accompanying \textit{Mathematica} notebook. The results of our exploration of parameter space are shown in Figure \ref{fig:adaptive_dynamics}.
-
-
-
-
+We numerically explored phenotype space for evolutionary equilibria $x^*$ by solving the root of the fitness gradient given in Equation \ref{eq:fitness_gradient_expression} across a range of parameter combinations. For each equilibrium we assessed its convergence and evolutionary stability by evaluating the fitness curvature (Equation \ref{eq:fitness_curvature_equilibrium_expression}) and the change in the direction of the gradient, respectively. Convergent stable but evolutionarily unstable equilibria were classified as branching points. The procedure is shown in the accompanying \textit{Mathematica} notebook.
